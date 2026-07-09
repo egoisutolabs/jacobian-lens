@@ -47,6 +47,10 @@ class _ByteTokenizer:
         ]
         return SimpleNamespace(input_ids=torch.tensor([ids]))
 
+    def encode(self, text: str, *, add_special_tokens: bool = True) -> list[int]:
+        ids = [1 + (b % 30) for b in text.encode()]
+        return [self.bos_token_id, *ids] if add_special_tokens else ids
+
     def decode(self, ids, **_kw) -> str:
         return "".join(chr(96 + int(i)) for i in ids)
 
@@ -82,6 +86,9 @@ class TinyDecoder(nn.Module):
         for block in self.layers:
             hidden = block(hidden)
         return SimpleNamespace(last_hidden_state=hidden)
+
+    def unembed_weight(self, token_ids) -> torch.Tensor:
+        return self.lm_head.weight[token_ids].detach()
 
     def unembed(self, residual: torch.Tensor) -> torch.Tensor:
         return self.lm_head(self.norm(residual.float()))

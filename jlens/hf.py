@@ -163,6 +163,9 @@ class HFLensModel:
     def forward(self, input_ids: torch.Tensor) -> Any:
         return self._text_module(input_ids=input_ids, use_cache=False)
 
+    def unembed_weight(self, token_ids: Any) -> torch.Tensor:
+        return self._lm_head.weight[token_ids].detach()
+
     def unembed(self, residual: torch.Tensor) -> torch.Tensor:
         target_device = self._lm_head.weight.device
         target_dtype = self._lm_head.weight.dtype

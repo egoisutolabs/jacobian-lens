@@ -50,3 +50,11 @@ class LensModel(Protocol):
         """Map a residual-stream tensor ``[..., d_model]`` to logits
         ``[..., vocab_size]`` (final norm + LM head)."""
         ...
+
+    def unembed_weight(self, token_ids: Any) -> torch.Tensor:
+        """Unembedding row(s) for ``token_ids``: ``[d_model]`` for a single id,
+        ``[len(token_ids), d_model]`` for a sequence. Used only by
+        :mod:`jlens.intervene` to build lens directions; fitting and
+        :meth:`apply` never touch it, so models used only for those can omit
+        it."""
+        ...

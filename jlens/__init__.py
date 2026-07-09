@@ -4,20 +4,28 @@
 of decoder-transformer residuals."""
 
 from jlens._logging import configure_logging
+from jlens.eval import EvalResult, run_eval
 from jlens.fitting import fit, jacobian_for_prompt
 from jlens.hf import HFLensModel, Layout, from_hf
 from jlens.hooks import ActivationRecorder
+from jlens.intervene import ResidualEditor, direction, steer, swap
 from jlens.lens import JacobianLens
 from jlens.protocol import LensModel
 
 __all__ = [
     "ActivationRecorder",
+    "EvalResult",
     "HFLensModel",
     "JacobianLens",
     "Layout",
     "LensModel",
+    "ResidualEditor",
     "configure_logging",
+    "direction",
     "fit",
     "from_hf",
     "jacobian_for_prompt",
+    "run_eval",
+    "steer",
+    "swap",
 ]
