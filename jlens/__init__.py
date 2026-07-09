@@ -4,6 +4,7 @@
 of decoder-transformer residuals."""
 
 from jlens._logging import configure_logging
+from jlens.dream import Concept, DreamResult, DreamStep, consolidate, dream, remember
 from jlens.eval import EvalResult, run_eval
 from jlens.fitting import fit, jacobian_for_prompt
 from jlens.hf import HFLensModel, Layout, from_hf
@@ -14,6 +15,9 @@ from jlens.protocol import LensModel
 
 __all__ = [
     "ActivationRecorder",
+    "Concept",
+    "DreamResult",
+    "DreamStep",
     "EvalResult",
     "HFLensModel",
     "JacobianLens",
@@ -21,10 +25,13 @@ __all__ = [
     "LensModel",
     "ResidualEditor",
     "configure_logging",
+    "consolidate",
     "direction",
+    "dream",
     "fit",
     "from_hf",
     "jacobian_for_prompt",
+    "remember",
     "run_eval",
     "steer",
     "swap",
